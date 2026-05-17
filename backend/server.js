@@ -22,6 +22,13 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.use((_, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
+
 app.use('/api/auth',          require('./routes/auth'));
 app.use('/api/contact',       require('./routes/contact'));
 app.use('/api/projects',      require('./routes/projects'));
@@ -40,5 +47,11 @@ app.get('/api/health', (_, res) => res.json({ status: 'ok' }));
 
 app.use(require('./middleware/errorHandler'));
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+// In Vercel's serverless environment VERCEL=1 is set automatically.
+// app.listen() is only needed for local development.
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+}
+
+module.exports = app;

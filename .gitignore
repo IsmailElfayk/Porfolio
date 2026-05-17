@@ -1,0 +1,11 @@
+node_modules/
+.env
+dist/
+.vercel/
+
+# SSH keys — never commit
+gitismail
+gitismail.pub
+
+# Backend secrets file (non-standard name, keep ignored explicitly)
+backend/env.env

@@ -5,6 +5,82 @@ Three independent sub-projects share one repository: a public frontend, an admin
 
 ---
 
+## Deployment
+
+This monorepo deploys as **three separate Vercel projects** (backend, frontend, admin).
+Each sub-project is linked independently — set the **Root Directory** in the Vercel dashboard when you import.
+
+### Branch → environment
+
+| Git branch | Vercel environment | URL type |
+|------------|-------------------|----------|
+| `main` | Production | custom domain / `*.vercel.app` stable |
+| any other branch / PR | Preview | `*-git-<branch>-*.vercel.app` |
+
+Push to `main` → automatic Production deployment.  
+Push to any other branch → automatic Preview deployment.
+
+### How to deploy
+
+**Option A — Git (recommended):**
+1. Push the repo to GitHub.
+2. On [vercel.com](https://vercel.com), import the repo **three times** — once per sub-project — setting the Root Directory to `backend`, `frontend`, and `admin` respectively.
+3. Set the environment variables listed below for each project.
+4. Every `git push` to `main` deploys automatically.
+
+**Option B — CLI:**
+```bash
+npm i -g vercel
+cd backend  && vercel --prod
+cd frontend && vercel --prod
+cd admin    && vercel --prod
+```
+
+### Environment variables
+
+Set these in **Vercel Dashboard → Project → Settings → Environment Variables**.
+Never commit real values — use separate values for Preview vs Production.
+
+#### `backend`
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `MONGODB_URI` | **Yes** | MongoDB Atlas connection string |
+| `JWT_SECRET` | **Yes** | Random secret for signing JWTs |
+| `CLIENT_URL` | **Yes** | Deployed frontend URL (for CORS) |
+| `ADMIN_URL` | **Yes** | Deployed admin URL (for CORS) |
+| `CLOUDINARY_NAME` | No | Cloudinary cloud name |
+| `CLOUDINARY_API_KEY` | No | Cloudinary API key |
+| `CLOUDINARY_SECRET_KEY` | No | Cloudinary API secret |
+| `ADMIN_EMAIL` | No | Seed admin e-mail |
+| `ADMIN_PASSWORD` | No | Seed admin password |
+
+#### `frontend`
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `VITE_API_URL` | **Yes** | Backend API base URL, e.g. `https://your-api.vercel.app/api` |
+
+#### `admin`
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `VITE_API_URL` | **Yes** | Backend API base URL |
+| `VITE_FRONTEND_URL` | **Yes** | Public frontend URL (used for the Preview link) |
+| `VITE_CLOUDINARY_CLOUD_NAME` | No | Cloudinary cloud name |
+| `VITE_CLOUDINARY_UPLOAD_PRESET` | No | Unsigned upload preset name |
+
+### Vercel Dashboard capabilities
+
+From the Vercel Dashboard you can:
+- Redeploy any past deployment without a new commit.
+- Promote a Preview deployment to Production.
+- Roll back Production to any previous deployment instantly.
+- Inspect build logs, function logs, and asset sizes under the **Resources** tab.
+- Assign a custom domain to any deployment.
+
+---
+
 ## Table of Contents
 
 1. [Project Structure](#1-project-structure)

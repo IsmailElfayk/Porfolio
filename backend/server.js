@@ -4,7 +4,7 @@ const cors     = require('cors');
 const connectDB = require('./config/db');
 
 const app = express();
-connectDB().catch((err) => { console.error('DB connection failed:', err.message); process.exit(1); });
+connectDB().catch((err) => { console.error('DB connection failed:', err.message); });
 
 const allowedOrigins = [
   ...(process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',').map((o) => o.trim()) : []),

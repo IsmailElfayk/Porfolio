@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — I. EL FAYK</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <style>
+    :root {
+      --bg:        #0a0a0a;
+      --surface:   #111111;
+      --surface-2: #181818;
+      --border:    #242424;
+      --text:      #f0f0f0;
+      --muted:     #666666;
+      --accent:    #818cf8;
+      --radius:    8px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      background: var(--bg); color: var(--text);
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem 2rem;
+      width: 100%; max-width: 380px;
+    }
+
+    h1   { font-size: 1.2rem; font-weight: 700; margin-bottom: .35rem; }
+    .sub { font-size: .84rem; color: var(--muted); margin-bottom: 1.75rem; }
+
+    label {
+      display: block; font-size: .8rem;
+      color: var(--muted); margin-bottom: .45rem;
+    }
+    input {
+      width: 100%; padding: .7rem 1rem;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text); font-family: inherit;
+      font-size: .9rem; outline: none;
+      transition: border-color .15s;
+    }
+    input:focus { border-color: var(--accent); }
+
+    .btn {
+      display: block; width: 100%;
+      margin-top: 1.125rem; padding: .7rem;
+      background: var(--accent); border: none;
+      border-radius: var(--radius);
+      color: #fff; font-family: inherit;
+      font-size: .9rem; font-weight: 500;
+      cursor: pointer; transition: opacity .15s;
+    }
+    .btn:hover   { opacity: .82; }
+    .btn:disabled { opacity: .45; cursor: not-allowed; }
+
+    .err  { margin-top: .875rem; font-size: .84rem; color: #f87171; min-height: 1.3em; }
+
+    /* Dashboard */
+    .dash { display: none; }
+    .dash.on { display: block; }
+    .login.off { display: none; }
+
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: .875rem; margin-top: 1.5rem; }
+    .stat {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.125rem;
+    }
+    .stat-val   { font-size: 1.75rem; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: .75rem; color: var(--muted); margin-top: .25rem; }
+
+    .updated {
+      margin-top: .875rem; font-size: .78rem; color: var(--muted);
+      text-align: right;
+    }
+    .back {
+      display: block; margin-top: 1.5rem;
+      text-align: center; font-size: .8rem;
+      color: var(--muted); text-decoration: none;
+    }
+    .back:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <!-- Login -->
+  <div class="login" id="login">
+    <h1>Admin</h1>
+    <p class="sub">Enter your admin secret to continue.</p>
+    <label for="secret">Admin Secret</label>
+    <input id="secret" type="password" placeholder="Enter secret&hellip;" autocomplete="current-password" />
+    <button class="btn" id="login-btn">Sign In</button>
+    <p class="err" id="err-msg"></p>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dash" id="dash">
+    <h1>Dashboard</h1>
+    <p class="sub">Site overview</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-val" id="stat-projects">—</div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" id="stat-status" style="font-size:1.1rem">Live</div>
+        <div class="stat-label">Status</div>
+      </div>
+    </div>
+    <p class="updated" id="stat-updated"></p>
+    <a href="/" class="back">← Back to portfolio</a>
+  </div>
+
+</div>
+
+<script>
+  const loginEl = document.getElementById('login');
+  const dashEl  = document.getElementById('dash');
+  const loginBtn = document.getElementById('login-btn');
+  const secretEl = document.getElementById('secret');
+  const errEl    = document.getElementById('err-msg');
+
+  async function tryLogin() {
+    const secret = secretEl.value.trim();
+    if (!secret) return;
+    loginBtn.disabled   = true;
+    loginBtn.textContent = 'Signing in…';
+    errEl.textContent   = '';
+
+    try {
+      const res  = await fetch('/api/admin', {
+        headers: { 'Authorization': 'Bearer ' + secret }
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        document.getElementById('stat-projects').textContent = data.totalProjects;
+        const d = new Date(data.lastUpdated);
+        document.getElementById('stat-updated').textContent =
+          'Last updated: ' + d.toLocaleString();
+        loginEl.classList.add('off');
+        dashEl.classList.add('on');
+      } else {
+        errEl.textContent = data.error || 'Invalid secret.';
+      }
+    } catch {
+      errEl.textContent = 'Network error — try again.';
+    } finally {
+      loginBtn.disabled   = false;
+      loginBtn.textContent = 'Sign In';
+    }
+  }
+
+  loginBtn.addEventListener('click', tryLogin);
+  secretEl.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryLogin(); });
+</script>
+</body>
+</html>

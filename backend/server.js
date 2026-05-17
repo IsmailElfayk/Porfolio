@@ -51,7 +51,13 @@ app.use(require('./middleware/errorHandler'));
 // app.listen() is only needed for local development.
 if (!process.env.VERCEL) {
   const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+  if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => {
+    console.log(`Server running on ${PORT}`);
+  });
+}
+
+module.exports = app;
 }
 
 module.exports = app;

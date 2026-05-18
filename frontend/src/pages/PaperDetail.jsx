@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { C, F } from '../styles/theme';
 
-const BASE = (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000') + '/api';
+const BASE = import.meta.env.VITE_BACKEND_URL + '/api';
 
 const mdComponents = {
   h1: ({ children }) => <h1 style={{ fontSize: 28, fontWeight: 800, margin: '32px 0 14px', color: C.text }}>{children}</h1>,

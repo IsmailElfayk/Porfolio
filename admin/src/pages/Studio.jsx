@@ -5,7 +5,7 @@ import FileUpload  from '../components/FileUpload';
 
 // ── API helper ────────────────────────────────────────────────────────────────
 
-const BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const BASE = (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000') + '/api';
 
 const makeApi = (token) => async (path, opts = {}) => {
   const headers = { 'Content-Type': 'application/json' };

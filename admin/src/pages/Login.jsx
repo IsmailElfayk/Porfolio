@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { C, F } from '../styles/theme';
 
-const BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const BASE = (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000') + '/api';
 
 const inputSt = {
   width: '100%', background: '#1E242C', border: '1px solid #262E38', borderRadius: 8,

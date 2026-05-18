@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { C, F } from '../styles/theme';
 import ImageUpload from '../components/ImageUpload';
 
-const BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const BASE = (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000') + '/api';
 
 const api = async (path, opts = {}) => {
   const res = await fetch(`${BASE}${path}`, {

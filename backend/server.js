@@ -1,27 +1,26 @@
 require('dotenv').config();
-const express  = require('express');
-const cors     = require('cors');
+const express   = require('express');
+const cors      = require('cors');
 const connectDB = require('./config/db');
-s
+
 const app = express();
 connectDB().catch((err) => { console.error('DB connection failed:', err.message); });
 
 const allowedOrigins = [
- ...(process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',').map((o) => o.trim()) : []),
- ...(process.env.ADMIN_URL ? process.env.ADMIN_URL.split(',').map((o) => o.trim()) : []),
-
- 'http://localhost:5173',
- 'http://localhost:5174',
-
- 'https://portfolio-lyart-eight.vercel.app',
-];
+  ...(process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',').map((o) => o.trim()) : []),
+  ...(process.env.ADMIN_URL  ? process.env.ADMIN_URL.split(',').map((o) => o.trim())  : []),
+  'http://localhost:5173',
+  'http://localhost:5174',
+].filter(Boolean);
 
 app.use(cors({
   origin: (origin, cb) => {
     if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
-    cb(new Error('Not allowed by CORS'));
+    cb(new Error(`CORS blocked for origin: ${origin}`));
   },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express.json());
 
@@ -50,18 +49,9 @@ app.get('/api/health', (_, res) => res.json({ status: 'ok' }));
 
 app.use(require('./middleware/errorHandler'));
 
-// In Vercel's serverless environment VERCEL=1 is set automatically.
-// app.listen() is only needed for local development.
 if (!process.env.VERCEL) {
   const PORT = process.env.PORT || 5000;
-  if (process.env.NODE_ENV !== "production") {
-  app.listen(PORT, () => {
-    console.log(`Server running on ${PORT}`);
-  });
+  app.listen(PORT, () => { console.log(`Server running on port ${PORT}`); });
 }
 
 module.exports = app;
-}
-
-module.exports = app;
-

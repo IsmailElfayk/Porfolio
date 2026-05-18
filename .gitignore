@@ -8,5 +8,7 @@ dist/
 gitismail
 gitismail.pub
 
-# Backend secrets file (non-standard name, keep ignored explicitly)
+# Misnamed env files (non-standard names — keep ignored explicitly)
 backend/env.env
+*/e.env
+e.env

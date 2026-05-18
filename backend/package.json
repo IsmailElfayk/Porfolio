@@ -2,7 +2,7 @@
   "name": "mern-storefront-backend",
   "version": "1.0.0",
   "engines": {
-    "node": "20.x"
+    "node": "24.x"
   },
   "scripts": {
     "start": "node server.js",

@@ -37,7 +37,7 @@ export default function Contact() {
     if (!form.name || !form.email || !form.message) return;
     setStatus('loading');
     try {
-      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const apiBase = (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000') + '/api';
       const res = await fetch(`${apiBase}/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

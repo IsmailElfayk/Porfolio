@@ -9,7 +9,7 @@ export const api = {
   }).then(r => r.json()),
 };
 
-const BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const BASE = `${BASE_URL}/api`;
 
 export const apiFetch = async (path, opts = {}) => {
   const res = await fetch(`${BASE}${path}`, {

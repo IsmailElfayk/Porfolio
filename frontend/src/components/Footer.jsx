@@ -8,7 +8,7 @@ const FALLBACK_SOCIALS = [
   { key: 'github',   url: '#' },
 ];
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE = (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000') + '/api';
 
 // Generate a random session id (persisted per tab)
 const SESSION_ID = Math.random().toString(36).slice(2) + Date.now().toString(36);

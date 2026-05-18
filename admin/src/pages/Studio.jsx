@@ -1045,7 +1045,7 @@ export default function Studio({ token, onLogout }) {
           <span style={{ color: C.muted, fontSize: 14 }}>Studio</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: 13 }}>
-          <a href={import.meta.env.VITE_FRONTEND_URL || 'http://localhost:5173'} target="_blank" rel="noreferrer"
+          <a href={import.meta.env.VITE_FRONTEND_URL} target="_blank" rel="noreferrer"
             style={{ color: C.muted, textDecoration: 'none' }}>Preview ↗</a>
           <button onClick={onLogout} style={{
             background: 'transparent', border: `1px solid ${C.border}`, borderRadius: 6,

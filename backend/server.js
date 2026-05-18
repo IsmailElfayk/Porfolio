@@ -2,15 +2,18 @@ require('dotenv').config();
 const express  = require('express');
 const cors     = require('cors');
 const connectDB = require('./config/db');
-
+s
 const app = express();
 connectDB().catch((err) => { console.error('DB connection failed:', err.message); });
 
 const allowedOrigins = [
-  ...(process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',').map((o) => o.trim()) : []),
-  ...(process.env.ADMIN_URL  ? process.env.ADMIN_URL.split(',').map((o) => o.trim())  : []),
-  'http://localhost:5173',
-  'http://localhost:5174',
+ ...(process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',').map((o) => o.trim()) : []),
+ ...(process.env.ADMIN_URL ? process.env.ADMIN_URL.split(',').map((o) => o.trim()) : []),
+
+ 'http://localhost:5173',
+ 'http://localhost:5174',
+
+ 'https://portfolio-lyart-eight.vercel.app',
 ];
 
 app.use(cors({
@@ -61,3 +64,4 @@ module.exports = app;
 }
 
 module.exports = app;
+

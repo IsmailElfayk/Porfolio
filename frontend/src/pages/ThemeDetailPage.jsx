@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import MarkdownRenderer from '../components/MarkdownRenderer';
 import { C, F } from '../styles/theme';
 import { getThemeBySlug } from '../api/index';
 
@@ -68,30 +68,8 @@ export default function ThemeDetailPage() {
 
         {/* Markdown description */}
         {theme.description ? (
-          <div style={{ maxWidth: 780, fontSize: 15, lineHeight: 1.8, color: C.text }}>
-            <ReactMarkdown
-              components={{
-                h1: ({ children }) => <h1 style={{ fontSize: 28, fontWeight: 800, margin: '32px 0 14px', color: C.text }}>{children}</h1>,
-                h2: ({ children }) => <h2 style={{ fontSize: 22, fontWeight: 700, margin: '28px 0 12px', color: C.text }}>{children}</h2>,
-                h3: ({ children }) => <h3 style={{ fontSize: 18, fontWeight: 700, margin: '22px 0 10px', color: C.text }}>{children}</h3>,
-                p:  ({ children }) => <p  style={{ margin: '0 0 16px', color: C.muted, fontSize: 15, lineHeight: 1.75 }}>{children}</p>,
-                strong: ({ children }) => <strong style={{ color: C.text, fontWeight: 700 }}>{children}</strong>,
-                em:     ({ children }) => <em style={{ color: C.muted }}>{children}</em>,
-                code: ({ inline, children }) => inline
-                  ? <code style={{ fontFamily: F.mono, fontSize: 13, background: C.panel2, padding: '2px 6px', borderRadius: 4, color: '#7DD8C8' }}>{children}</code>
-                  : <pre style={{ background: C.panel, border: `1px solid ${C.border}`, borderRadius: 8, padding: 16, overflowX: 'auto', margin: '16px 0' }}>
-                      <code style={{ fontFamily: F.mono, fontSize: 13, color: '#7DD8C8' }}>{children}</code>
-                    </pre>,
-                ul: ({ children }) => <ul style={{ paddingLeft: 20, margin: '0 0 16px', color: C.muted }}>{children}</ul>,
-                ol: ({ children }) => <ol style={{ paddingLeft: 20, margin: '0 0 16px', color: C.muted }}>{children}</ol>,
-                li: ({ children }) => <li style={{ marginBottom: 6, lineHeight: 1.65 }}>{children}</li>,
-                blockquote: ({ children }) => (
-                  <blockquote style={{ borderLeft: `3px solid ${C.blue}`, margin: '16px 0', paddingLeft: 16, color: C.muted }}>{children}</blockquote>
-                ),
-              }}
-            >
-              {theme.description}
-            </ReactMarkdown>
+          <div style={{ maxWidth: 780 }}>
+            <MarkdownRenderer>{theme.description}</MarkdownRenderer>
           </div>
         ) : (
           <p style={{ color: C.muted, fontSize: 15, lineHeight: 1.75 }}>No description available yet.</p>

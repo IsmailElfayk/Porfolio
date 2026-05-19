@@ -20,7 +20,9 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
-          markdown: ['react-markdown'],
+          // All remark/rehype + katex together to avoid circular chunk warnings
+          markdown: ['react-markdown', 'remark-gfm', 'remark-math', 'rehype-katex', 'katex', 'rehype-sanitize', 'rehype-highlight', 'highlight.js'],
+          mermaid: ['mermaid'],
         },
       },
     },

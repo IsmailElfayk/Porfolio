@@ -83,7 +83,7 @@ export default function Contact() {
         <div className="contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 40 }}>
           <form onSubmit={handleSubmit}>
             <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
-              {[['name', 'Your name', 'Jane Doe'], ['email', 'Your email', 'jane@studio.com']].map(([k, l, ph]) => (
+              {[['name', 'Your name', 'ismail elfayk'], ['email', 'Your email', 'ismailelfayk@gmail.com']].map(([k, l, ph]) => (
                 <div key={k}>
                   <div style={{ fontSize: 12, fontWeight: 600, color: C.muted, marginBottom: 8 }}>{l}</div>
                   <input type={k === 'email' ? 'email' : 'text'} placeholder={ph} value={form[k]}

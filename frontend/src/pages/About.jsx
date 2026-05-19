@@ -85,10 +85,10 @@ export default function About() {
   return (
     <div style={{ background: C.bg, color: C.text, fontFamily: F.sans, minHeight: '100vh' }}>
       <Navbar />
-      <div style={{ padding: '40px 80px 60px', maxWidth: 1100, margin: '0 auto' }}>
+      <div className="page-wrap" style={{ padding: '40px 80px 60px', maxWidth: 1100, margin: '0 auto' }}>
 
         {/* ── Profile header — image + name + Download CV ── */}
-        <div style={{ display: 'flex', gap: 26, alignItems: 'center', marginBottom: 28 }}>
+        <div className="about-profile" style={{ display: 'flex', gap: 26, alignItems: 'center', marginBottom: 28 }}>
           <div style={{
             width: 130, height: 130, borderRadius: '50%', flexShrink: 0,
             background: data.image ? undefined : 'radial-gradient(circle at 40% 35%, #d4a373, #6b4f3a)',
@@ -104,7 +104,7 @@ export default function About() {
               </svg>
             )}
           </div>
-          <div style={{ flexGrow: 1, display: 'flex', alignItems: 'center', gap: 20 }}>
+          <div className="about-info" style={{ flexGrow: 1, display: 'flex', alignItems: 'center', gap: 20 }}>
             <div style={{ flexGrow: 1 }}>
               <h1 style={{ fontSize: 30, fontWeight: 800, margin: '0 0 6px' }}>{displayName}</h1>
               <div style={{ color: C.muted, fontSize: 15, marginBottom: 4 }}>{displayHeadline}{displaySubtitle ? ` | ${displaySubtitle}` : ''}</div>
@@ -130,7 +130,7 @@ export default function About() {
             <div style={{ marginBottom: 36 }}>
               <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 16px' }}>Experience</h2>
               {experience.map((e, i) => (
-                <div key={i} style={{
+                <div key={i} className="resume-row" style={{
                   display: 'grid', gridTemplateColumns: '180px 1fr', padding: '20px 0',
                   borderTop: `1px solid ${C.border}`, gap: 24, alignItems: 'baseline'
                 }}>
@@ -149,7 +149,7 @@ export default function About() {
           {/* 2. Education */}
           <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 16px' }}>Education</h2>
           {education.map((e, i) => (
-            <div key={i} style={{
+            <div key={i} className="resume-row" style={{
               display: 'grid', gridTemplateColumns: '180px 1fr',
               padding: '14px 0', borderTop: `1px solid ${C.border}`, gap: 24
             }}>
@@ -161,7 +161,7 @@ export default function About() {
 
           {/* 3. Core strengths */}
           <h2 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 16px' }}>Core Strengths</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 14, marginBottom: 48 }}>
+          <div className="grid-4col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 14, marginBottom: 48 }}>
             {strengths.map((s, i) => (
               <div key={i} style={{
                 border: `1px solid ${C.border}`, borderRadius: 10, padding: '18px 16px',
@@ -177,7 +177,7 @@ export default function About() {
           {skills.length > 0 && (
             <div style={{ marginBottom: 36 }}>
               <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 16px' }}>Skills</h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 14 }}>
+              <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 14 }}>
                 {Object.entries(skillGroups).map(([cat, items]) => (
                   <div key={cat} style={{ background: C.panel, border: `1px solid ${C.border}`, borderRadius: 10, padding: 18 }}>
                     <div style={{
@@ -198,7 +198,7 @@ export default function About() {
 
         {/* ── 5. What's on the desk — LAST section ── */}
         <h2 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 16px' }}>What's on the desk</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }}>
+        <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }}>
           <ul style={{ listStyle: 'none', padding: 0 }}>
             {deskItems.map((item, i) => (
               <li key={i} style={{

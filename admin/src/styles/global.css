@@ -20,3 +20,33 @@ input, textarea, select { font-family: inherit; }
 /* Range input reset */
 input[type="range"] { -webkit-appearance: none; appearance: none; height: 2px; }
 input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; border-radius: 50%; cursor: pointer; }
+
+/* ── Admin responsive ───────────────────────────────────────────── */
+
+.studio-menu-btn { display: none; background: transparent; border: none; color: #fff; cursor: pointer; padding: 4px 8px; font-size: 20px; line-height: 1; }
+
+@media (max-width: 1024px) {
+  .studio-main { padding: 20px 20px 60px !important; }
+  /* 4-col form grids → 2-col on md */
+  .agrid-4 { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+@media (max-width: 768px) {
+  /* Sidebar: hidden by default, overlay when .open */
+  .studio-sidebar { display: none !important; }
+  .studio-sidebar.open {
+    display: block !important;
+    position: fixed !important; top: 0; left: 0; bottom: 0;
+    z-index: 200; overflow-y: auto;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.5);
+  }
+  /* Show menu toggle button */
+  .studio-menu-btn { display: flex; align-items: center; }
+  /* Main content: full width + smaller padding */
+  .studio-main { padding: 16px 12px 40px !important; max-height: none !important; }
+  /* All admin form grids → single column */
+  .agrid   { grid-template-columns: 1fr !important; }
+  .agrid-4 { grid-template-columns: 1fr !important; }
+  /* 2-col profile side-by-side → stack */
+  .agrid-prof { grid-template-columns: 1fr !important; }
+}

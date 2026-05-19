@@ -32,7 +32,7 @@ export default function Research() {
   return (
     <div style={{ background: C.bg, color: C.text, fontFamily: F.sans, minHeight: '100vh' }}>
       <Navbar />
-      <div style={{ padding: '40px 80px 60px', maxWidth: 1100, margin: '0 auto' }}>
+      <div className="page-wrap" style={{ padding: '40px 80px 60px', maxWidth: 1100, margin: '0 auto' }}>
         <h1 style={{ fontSize: 32, fontWeight: 800, margin: '0 0 8px' }}>Research</h1>
         <p style={{ color: C.muted, fontSize: 14, margin: '0 0 32px', maxWidth: 700 }}>
           Papers, certificates, and ongoing research. My work focuses on numerical analysis, PDEs, and multiobjective optimization.
@@ -40,7 +40,7 @@ export default function Research() {
 
         <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 14px' }}>Publications</h2>
         {papers.map((p) => (
-          <article key={p._id} style={{ display: 'grid', gridTemplateColumns: '80px 1fr 220px',
+          <article key={p._id} className="pub-row" style={{ display: 'grid', gridTemplateColumns: '80px 1fr 220px',
             padding: '22px 0', borderTop: `1px solid ${C.border}`, gap: 24, alignItems: 'baseline' }}>
             <div style={{ fontSize: 22, fontWeight: 800 }}>{p.year}</div>
             <div>
@@ -78,7 +78,7 @@ export default function Research() {
         <div style={{ borderBottom: `1px solid ${C.border}`, marginBottom: 36 }} />
 
         <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 14px' }}>Talks</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+        <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
           {talks.map((t, i) => (
             <div key={i} style={{ background: C.panel, border: `1px solid ${C.border}`, borderRadius: 10, padding: 18 }}>
               <div style={{ fontSize: 12, fontFamily: F.mono, color: C.blue, marginBottom: 8, fontWeight: 600 }}>

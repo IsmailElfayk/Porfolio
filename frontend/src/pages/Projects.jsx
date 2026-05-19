@@ -102,7 +102,7 @@ export default function Projects() {
   return (
     <div style={{ background: C.bg, color: C.text, fontFamily: F.sans, minHeight: '100vh' }}>
       <Navbar />
-      <div style={{ padding: '32px 80px 60px' }}>
+      <div className="page-wrap" style={{ padding: '32px 80px 60px' }}>
         <h1 style={{ fontSize: 32, fontWeight: 800, margin: '0 0 8px' }}>Projects</h1>
         <p style={{ color: C.muted, fontSize: 14, margin: '0 0 22px' }}>A showcase of my work, blending mathematical rigor with full-stack development.</p>
 
@@ -148,7 +148,7 @@ export default function Projects() {
           </div>
         )}
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 18, marginBottom: 32 }}>
+        <div className="grid-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 18, marginBottom: 32 }}>
           {visible.map((p, i) => {
             const detailPath = (p.type === 'paper') ? `/papers/${p._id}`
               : (p.type === 'writing') ? `/writing/${p._id}`

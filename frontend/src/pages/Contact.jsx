@@ -61,7 +61,7 @@ export default function Contact() {
   return (
     <div style={{ background: C.bg, color: C.text, fontFamily: F.sans, minHeight: '100vh' }}>
       <Navbar />
-      <div style={{ padding: '40px 80px 60px', maxWidth: 1100, margin: '0 auto' }}>
+      <div className="page-wrap" style={{ padding: '40px 80px 60px', maxWidth: 1100, margin: '0 auto' }}>
         <h1 style={{ fontSize: 32, fontWeight: 800, margin: '0 0 8px' }}>Get in touch</h1>
         <p style={{ color: C.muted, fontSize: 14, margin: '0 0 36px', maxWidth: 600 }}>
           Whether it's a freelance project, research collaboration, or just a chat about numerical methods — I read everything.
@@ -80,9 +80,9 @@ export default function Contact() {
           </div>
         )}
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 40 }}>
+        <div className="contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 40 }}>
           <form onSubmit={handleSubmit}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+            <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
               {[['name', 'Your name', 'Jane Doe'], ['email', 'Your email', 'jane@studio.com']].map(([k, l, ph]) => (
                 <div key={k}>
                   <div style={{ fontSize: 12, fontWeight: 600, color: C.muted, marginBottom: 8 }}>{l}</div>

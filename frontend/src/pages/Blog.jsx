@@ -33,12 +33,12 @@ export default function Blog() {
   return (
     <div style={{ background: C.bg, color: C.text, fontFamily: F.sans, minHeight: '100vh' }}>
       <Navbar />
-      <div style={{ padding: '40px 80px 60px', maxWidth: 1100, margin: '0 auto' }}>
+      <div className="page-wrap" style={{ padding: '40px 80px 60px', maxWidth: 1100, margin: '0 auto' }}>
         <h1 style={{ fontSize: 32, fontWeight: 800, margin: '0 0 8px' }}>Writing</h1>
         <p style={{ color: C.muted, fontSize: 14, margin: '0 0 36px' }}>Notes on the seam between mathematics and software. Updated when something is worth saying.</p>
 
         {/* Featured */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 28,
+        <div className="blog-featured" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 28,
           background: C.panel, border: `1px solid ${C.border}`, borderRadius: 14, padding: 22, marginBottom: 32 }}>
           <div style={{ aspectRatio: '4/3', borderRadius: 10, overflow: 'hidden',
             background: 'radial-gradient(circle at 30% 40%, #1a4040 0%, #0c1a1c 80%)' }}>
@@ -66,7 +66,7 @@ export default function Blog() {
         {/* List */}
         <div>
           {rest.map((p, i) => (
-            <div key={p._id} style={{ display: 'grid', gridTemplateColumns: '120px 1fr 100px 80px',
+            <div key={p._id} className="blog-post-row" style={{ display: 'grid', gridTemplateColumns: '120px 1fr 100px 80px',
               padding: '22px 4px', borderTop: `1px solid ${C.border}`, alignItems: 'baseline', gap: 22 }}>
               <span style={{ color: C.muted, fontSize: 13, fontFamily: F.mono }}>{fmt(p.publishedAt)}</span>
               <div>

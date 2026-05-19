@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { C, F } from '../styles/theme';
 
@@ -10,12 +11,13 @@ const NAV_ITEMS = [
 
 export default function Navbar({ brand = 'I.EL FAYK' }) {
   const { pathname } = useLocation();
+  const [open, setOpen] = useState(false);
 
   const isActive = (path) =>
     path === '/' ? pathname === '/' : pathname.startsWith(path);
 
   return (
-    <header style={{
+    <header className="navbar" style={{
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       padding: '20px 40px', borderBottom: `1px solid ${C.border}`,
       background: C.bg, position: 'sticky', top: 0, zIndex: 50,
@@ -27,7 +29,8 @@ export default function Navbar({ brand = 'I.EL FAYK' }) {
         <span style={{ fontWeight: 700, fontSize: 16 }}>{brand}</span>
       </Link>
 
-      <nav style={{ display: 'flex', alignItems: 'center', gap: 36, fontSize: 14, fontWeight: 500 }}>
+      {/* Desktop nav */}
+      <nav className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: 36, fontSize: 14, fontWeight: 500 }}>
         {NAV_ITEMS.map(([label, path]) => (
           <Link key={path} to={path} style={{
             color: isActive(path) ? C.text : C.muted,
@@ -36,6 +39,28 @@ export default function Navbar({ brand = 'I.EL FAYK' }) {
           }}>{label}</Link>
         ))}
       </nav>
+
+      {/* Hamburger button — visible only on sm via CSS */}
+      <button className="nav-hamburger" onClick={() => setOpen((o) => !o)} aria-label="Toggle menu" style={{ color: C.text }}>
+        {open ? '✕' : '☰'}
+      </button>
+
+      {/* Mobile dropdown */}
+      {open && (
+        <nav style={{
+          position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 49,
+          background: C.bg, borderBottom: `1px solid ${C.border}`,
+          padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: 18,
+          fontSize: 15, fontWeight: 500,
+        }}>
+          {NAV_ITEMS.map(([label, path]) => (
+            <Link key={path} to={path} onClick={() => setOpen(false)} style={{
+              color: isActive(path) ? C.text : C.muted,
+              textDecoration: 'none',
+            }}>{label}</Link>
+          ))}
+        </nav>
+      )}
     </header>
   );
 }

@@ -91,10 +91,10 @@ function ProfileTab({ api }) {
   };
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: 20 }}>
+    <div className="agrid-prof" style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: 20 }}>
       <div>
         <Section title="Identity" subtitle="Shown across home, about, and resume pages.">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+          <div className="agrid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
             <Field label="Display name"  value={profile.name}     onChange={set('name')} />
             <Field label="Headline"      value={profile.headline} onChange={set('headline')} />
             <Field label="Subtitle"      value={profile.subtitle} onChange={set('subtitle')} />
@@ -328,7 +328,7 @@ function SectionItemsTab({ api }) {
     <div>
       <Section title={editing ? 'Edit section item' : 'Add section item'}
         subtitle="Items that appear as clickable cards under each home-page section.">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 80px', gap: 14, marginBottom: 14 }}>
+        <div className="agrid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 80px', gap: 14, marginBottom: 14 }}>
           <div>
             <div style={{ fontSize: 12, fontWeight: 600, color: C.muted, marginBottom: 6 }}>Title</div>
             <input value={form.title} onChange={setF('title')} style={inputSt} />
@@ -451,7 +451,7 @@ function PapersTab({ api }) {
   return (
     <div>
       <Section title={editing ? 'Edit paper' : 'Add paper'} subtitle="Metadata for the research page.">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 12, marginBottom: 14 }}>
+        <div className="agrid-4" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 12, marginBottom: 14 }}>
           <div>
             <div style={{ fontSize: 12, fontWeight: 600, color: C.muted, marginBottom: 6 }}>Year</div>
             <input value={form.year} onChange={setF('year')} type="number" style={inputSt} />
@@ -479,7 +479,7 @@ function PapersTab({ api }) {
           <div style={{ fontSize: 12, fontWeight: 600, color: C.muted, marginBottom: 6 }}>Short description (card preview)</div>
           <input value={form.shortDescription} onChange={setF('shortDescription')} style={inputSt} placeholder="One-line summary shown on the card…" />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+        <div className="agrid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
           <div>
             <div style={{ fontSize: 12, fontWeight: 600, color: C.muted, marginBottom: 6 }}>Authors</div>
             <input value={form.authors} onChange={setF('authors')} placeholder="I. El Fayk" style={inputSt} />
@@ -582,7 +582,7 @@ function ProjectsTab({ api }) {
   return (
     <div>
       <Section title={editing ? 'Edit project' : 'Add project'}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+        <div className="agrid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
           <div>
             <div style={{ fontSize: 12, fontWeight: 600, color: C.muted, marginBottom: 6 }}>Title</div>
             <input value={form.title} onChange={setF('title')} style={inputSt} />
@@ -628,7 +628,7 @@ function ProjectsTab({ api }) {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginTop: 14 }}>
+        <div className="agrid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginTop: 14 }}>
           <div>
             <div style={{ fontSize: 12, fontWeight: 600, color: C.muted, marginBottom: 6 }}>Tags (comma-sep)</div>
             <input value={typeof form.tags === 'string' ? form.tags : (form.tags || []).join(', ')} onChange={setF('tags')} style={inputSt} />
@@ -639,7 +639,7 @@ function ProjectsTab({ api }) {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginTop: 14 }}>
+        <div className="agrid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginTop: 14 }}>
           <div>
             <div style={{ fontSize: 12, fontWeight: 600, color: C.muted, marginBottom: 6 }}>Live URL</div>
             <input value={form.liveUrl} onChange={setF('liveUrl')} placeholder="https://…" style={inputSt} />
@@ -733,7 +733,7 @@ function PostsTab({ api }) {
           <div style={{ fontSize: 12, fontWeight: 600, color: C.muted, marginBottom: 6 }}>Title</div>
           <input value={form.title} onChange={setF('title')} style={inputSt} />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 14, marginBottom: 14 }}>
+        <div className="agrid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 14, marginBottom: 14 }}>
           <div>
             <div style={{ fontSize: 12, fontWeight: 600, color: C.muted, marginBottom: 6 }}>Tag</div>
             <input value={form.tag} onChange={setF('tag')} placeholder="Numerics, Topology…" style={inputSt} />
@@ -883,7 +883,7 @@ function AboutTab({ api }) {
 
       <Section title="Skills" subtitle="Shown in the Skills section on the About page." action={<Btn onClick={addSkill} size="sm">+ Add</Btn>}>
         {(about.skills || []).map((s, i) => (
-          <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: 10, marginBottom: 10,
+          <div key={i} className="agrid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: 10, marginBottom: 10,
             padding: 12, background: C.panel2, borderRadius: 8, border: `1px solid ${C.border}` }}>
             <input value={s.name} onChange={(ev) => setSkill(i, 'name', ev.target.value)} placeholder="Skill name" style={{ ...inputSt, marginBottom: 0 }} />
             <input value={s.level} onChange={(ev) => setSkill(i, 'level', ev.target.value)} placeholder="Level (Expert, Advanced…)" style={{ ...inputSt, marginBottom: 0 }} />
@@ -896,7 +896,7 @@ function AboutTab({ api }) {
 
       <Section title="Experience" action={<Btn onClick={addExp} size="sm">+ Add</Btn>}>
         {(about.experience || []).map((e, i) => (
-          <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr auto', gap: 10, marginBottom: 10,
+          <div key={i} className="agrid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr auto', gap: 10, marginBottom: 10,
             padding: 12, background: C.panel2, borderRadius: 8, border: `1px solid ${C.border}` }}>
             <input value={e.title} onChange={(ev) => setExp(i, 'title', ev.target.value)} placeholder="Title" style={{ ...inputSt, marginBottom: 0 }} />
             <input value={e.company} onChange={(ev) => setExp(i, 'company', ev.target.value)} placeholder="Company" style={{ ...inputSt, marginBottom: 0 }} />
@@ -910,7 +910,7 @@ function AboutTab({ api }) {
 
       <Section title="Education" action={<Btn onClick={addEdu} size="sm">+ Add</Btn>}>
         {(about.education || []).map((e, i) => (
-          <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: 10, marginBottom: 10,
+          <div key={i} className="agrid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: 10, marginBottom: 10,
             padding: 12, background: C.panel2, borderRadius: 8, border: `1px solid ${C.border}` }}>
             <input value={e.degree} onChange={(ev) => setEdu(i, 'degree', ev.target.value)} placeholder="Degree" style={{ ...inputSt, marginBottom: 0 }} />
             <input value={e.institution} onChange={(ev) => setEdu(i, 'institution', ev.target.value)} placeholder="Institution" style={{ ...inputSt, marginBottom: 0 }} />
@@ -935,7 +935,7 @@ function AboutTab({ api }) {
 
       <Section title="What's on the desk" subtitle="Tool/gear list at the bottom of the About page." action={<Btn onClick={addDesk} size="sm">+ Add</Btn>}>
         {(about.deskItems || []).map((d, i) => (
-          <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: 10, marginBottom: 10,
+          <div key={i} className="agrid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: 10, marginBottom: 10,
             padding: 12, background: C.panel2, borderRadius: 8, border: `1px solid ${C.border}` }}>
             <input value={d.label} onChange={(ev) => setDesk(i, 'label', ev.target.value)} placeholder="Label (e.g. Editor)" style={{ ...inputSt, marginBottom: 0 }} />
             <input value={d.value} onChange={(ev) => setDesk(i, 'value', ev.target.value)} placeholder="Value (e.g. Neovim)" style={{ ...inputSt, marginBottom: 0 }} />
@@ -947,7 +947,7 @@ function AboutTab({ api }) {
 
       <Section title="Talks" subtitle="Shown on the Research page." action={<Btn onClick={addTalk} size="sm">+ Add</Btn>}>
         {(about.talks || []).map((t, i) => (
-          <div key={i} style={{ display: 'grid', gridTemplateColumns: '80px 1fr 1fr auto', gap: 10, marginBottom: 10,
+          <div key={i} className="agrid" style={{ display: 'grid', gridTemplateColumns: '80px 1fr 1fr auto', gap: 10, marginBottom: 10,
             padding: 12, background: C.panel2, borderRadius: 8, border: `1px solid ${C.border}` }}>
             <input value={t.year} onChange={(ev) => setTalk(i, 'year', ev.target.value)} placeholder="Year" style={{ ...inputSt, marginBottom: 0 }} />
             <input value={t.title} onChange={(ev) => setTalk(i, 'title', ev.target.value)} placeholder="Talk title" style={{ ...inputSt, marginBottom: 0 }} />
@@ -1031,7 +1031,8 @@ const SIDEBAR = [
 ];
 
 export default function Studio({ token, onLogout }) {
-  const [tab, setTab] = useState('profile');
+  const [tab,         setTab]         = useState('profile');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const api = makeApi(token);
 
   return (
@@ -1045,6 +1046,10 @@ export default function Studio({ token, onLogout }) {
           <span style={{ color: C.muted, fontSize: 14 }}>Studio</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: 13 }}>
+          <button className="studio-menu-btn" onClick={() => setSidebarOpen((o) => !o)}
+            aria-label="Toggle sidebar" style={{ color: C.muted }}>
+            {sidebarOpen ? '✕' : '☰'}
+          </button>
           <a href={import.meta.env.VITE_FRONTEND_URL} target="_blank" rel="noreferrer"
             style={{ color: C.muted, textDecoration: 'none' }}>Preview ↗</a>
           <button onClick={onLogout} style={{
@@ -1055,13 +1060,13 @@ export default function Studio({ token, onLogout }) {
       </header>
 
       <div style={{ display: 'flex' }}>
-        <aside style={{ width: 220, borderRight: `1px solid ${C.border}`, padding: '24px 16px', background: C.bg, fontSize: 13 }}>
+        <aside className={`studio-sidebar${sidebarOpen ? ' open' : ''}`} style={{ width: 220, borderRight: `1px solid ${C.border}`, padding: '24px 16px', background: C.bg, fontSize: 13 }}>
           {SIDEBAR.map((s) => (
             <div key={s.g} style={{ marginBottom: 22 }}>
               <div style={{ fontSize: 10.5, fontWeight: 700, color: C.faint, letterSpacing: '0.1em',
                 textTransform: 'uppercase', padding: '0 10px', marginBottom: 8 }}>{s.g}</div>
               {s.items.map(([id, label, icon]) => (
-                <button key={id} onClick={() => setTab(id)} style={{
+                <button key={id} onClick={() => { setTab(id); setSidebarOpen(false); }} style={{
                   display: 'flex', alignItems: 'center', gap: 10, padding: '8px 10px', width: '100%',
                   borderRadius: 6, background: tab === id ? C.panel2 : 'transparent',
                   color: tab === id ? C.text : C.muted, fontWeight: tab === id ? 600 : 500,
@@ -1075,7 +1080,7 @@ export default function Studio({ token, onLogout }) {
           ))}
         </aside>
 
-        <main style={{ flex: 1, padding: '28px 36px 60px', maxHeight: 'calc(100vh - 57px)', overflowY: 'auto' }}>
+        <main className="studio-main" style={{ flex: 1, padding: '28px 36px 60px', maxHeight: 'calc(100vh - 57px)', overflowY: 'auto' }}>
           <div style={{ marginBottom: 22 }}>
             <div style={{ fontSize: 12, color: C.muted, fontFamily: F.mono, marginBottom: 6 }}>STUDIO · CONTENT</div>
             <h1 style={{ fontSize: 28, fontWeight: 800, margin: 0 }}>Edit content</h1>

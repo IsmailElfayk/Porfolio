@@ -54,11 +54,11 @@ export default function Home() {
   return (
     <div style={{ background: C.bg, color: C.text, fontFamily: F.sans, minHeight: '100vh' }}>
       <Navbar active="home" />
-      <div style={{ padding: '32px 80px 60px' }}>
+      <div className="page-wrap" style={{ padding: '32px 80px 60px' }}>
 
         <HeroVisual>
           <div style={{ position: 'relative', textAlign: 'center', maxWidth: 800, padding: '0 32px' }}>
-            <h1 style={{ fontSize: 52, fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0, marginBottom: 18 }}>
+            <h1 className="hero-title" style={{ fontSize: 52, fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0, marginBottom: 18 }}>
               {settings.heroTitle || FALLBACK_SETTINGS.heroTitle}
             </h1>
             <p style={{ fontSize: 16, color: C.muted, lineHeight: 1.6, margin: '0 auto 26px', maxWidth: 600 }}>
@@ -125,7 +125,7 @@ export default function Home() {
               </div>
               <Link to="/projects" style={{ color: C.blue, fontSize: 14, fontWeight: 600 }}>See all →</Link>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 18 }}>
+            <div className="grid-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 18 }}>
               {displayProjects.slice(0, 3).map((p, i) => (
                 <Link key={p._id} to={`/projects/${p._id}`} style={{ textDecoration: 'none', color: C.text }}>
                   <div style={{ position: 'relative', height: 220, border: `1px solid ${C.border}`, borderRadius: 12, overflow: 'hidden', background: 'linear-gradient(135deg, #1a3a3a, #0a1422)' }}>

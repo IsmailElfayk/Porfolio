@@ -20,3 +20,47 @@ input, textarea, select { font-family: inherit; }
 /* Range input reset */
 input[type="range"] { -webkit-appearance: none; appearance: none; height: 2px; }
 input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; border-radius: 50%; cursor: pointer; }
+
+/* ── Responsive helpers ─────────────────────────────────────────── */
+
+/* Hamburger — hidden on desktop, shown on sm */
+.nav-hamburger { display: none; background: transparent; border: none; cursor: pointer; padding: 4px; font-size: 20px; line-height: 1; }
+
+@media (max-width: 1024px) {
+  /* Page padding: 80px sides → 32px */
+  .page-wrap { padding-left: 32px !important; padding-right: 32px !important; }
+  /* 3-col grids → 2-col on md */
+  .grid-3col { grid-template-columns: repeat(2, 1fr) !important; }
+  /* Contact page: drop fixed-width sidebar below form */
+  .contact-grid { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 768px) {
+  /* Navbar */
+  .navbar { padding-left: 20px !important; padding-right: 20px !important; }
+  .nav-links { display: none !important; }
+  .nav-hamburger { display: flex; align-items: center; color: #fff; }
+
+  /* Page wrapper */
+  .page-wrap { padding: 24px 16px 40px !important; }
+
+  /* Hero headline */
+  .hero-title { font-size: clamp(26px, 7vw, 38px) !important; }
+
+  /* Grid collapses */
+  .grid-3col { grid-template-columns: 1fr !important; }
+  .grid-4col { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid-2col { grid-template-columns: 1fr !important; }
+
+  /* About page */
+  .about-profile { flex-direction: column !important; align-items: flex-start !important; }
+  .about-info    { flex-wrap: wrap !important; gap: 12px !important; }
+  .resume-row    { grid-template-columns: 1fr !important; gap: 2px !important; }
+
+  /* Research publications */
+  .pub-row { grid-template-columns: 1fr !important; gap: 12px !important; }
+
+  /* Blog */
+  .blog-featured  { grid-template-columns: 1fr !important; }
+  .blog-post-row  { grid-template-columns: 1fr !important; gap: 6px !important; }
+}

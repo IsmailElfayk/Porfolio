@@ -1063,7 +1063,7 @@ export default function Studio({ token, onLogout }) {
       <div style={{ display: 'flex' }}>
         {sidebarOpen && (
           <div onClick={() => setSidebarOpen(false)} style={{
-            position: 'fixed', inset: 0, zIndex: 150, background: 'rgba(0,0,0,0.55)',
+            position: 'fixed', top: 57, left: 0, right: 0, bottom: 0, zIndex: 150, background: 'rgba(0,0,0,0.55)',
           }} />
         )}
         <aside className={`studio-sidebar${sidebarOpen ? ' open' : ''}`} style={{ width: 220, borderRight: `1px solid ${C.border}`, padding: '24px 16px', background: C.bg, fontSize: 13 }}>

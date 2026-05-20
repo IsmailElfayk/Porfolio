@@ -93,7 +93,7 @@ export default function ProjectDetail() {
 
         {/* Rapport (Markdown) */}
         {p.rapport ? (
-          <div style={{ Width: 100%, fontSize: 15, lineHeight: 1.8, color: C.text, marginBottom: 40 }}>
+          <div style={{ Width: '100%', fontSize: 15, lineHeight: 1.8, color: C.text, marginBottom: 40 }}>
             <MarkdownRenderer>{p.rapport}</MarkdownRenderer>
           </div>
         ) : (

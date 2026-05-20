@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { C, F } from '../styles/theme';
 import ImageUpload from '../components/ImageUpload';
 import FileUpload  from '../components/FileUpload';
+import MarkdownRenderer from '../components/MarkdownRenderer';
 
 // ── API helper ────────────────────────────────────────────────────────────────
 
@@ -368,9 +369,10 @@ function SectionItemsTab({ api }) {
               style={{ ...inputSt, resize: 'vertical', lineHeight: 1.6, fontFamily: F.mono, fontSize: 12 }} />
             {preview && (
               <div style={{ background: C.panel2, border: `1px solid ${C.border}`, borderRadius: 8,
-                padding: '10px 14px', fontSize: 13, color: C.text, lineHeight: 1.7,
-                whiteSpace: 'pre-wrap', overflowY: 'auto', maxHeight: 260 }}>
-                {form.rapport || <span style={{ color: C.faint }}>Preview will appear here…</span>}
+                padding: '10px 14px', overflowY: 'auto', maxHeight: 260 }}>
+                {form.rapport
+                  ? <MarkdownRenderer>{form.rapport}</MarkdownRenderer>
+                  : <span style={{ color: C.faint, fontSize: 13 }}>Preview will appear here…</span>}
               </div>
             )}
           </div>
@@ -421,6 +423,7 @@ function PapersTab({ api }) {
   const [form,   setForm]   = useState(BLANK_PAPER);
   const [editing, setEditing] = useState(null);
   const [saving,  setSaving]  = useState(false);
+  const [preview, setPreview] = useState(false);
 
   useEffect(() => { api('/papers').then(setPapers).catch(() => {}); }, []);
 
@@ -437,7 +440,7 @@ function PapersTab({ api }) {
         const p = await api('/papers', { method: 'POST', body: payload });
         setPapers((ps) => [p, ...ps]);
       }
-      setForm(BLANK_PAPER); setEditing(null);
+      setForm(BLANK_PAPER); setEditing(null); setPreview(false);
     } catch (e) { alert(e.message); }
     finally { setSaving(false); }
   };
@@ -490,13 +493,29 @@ function PapersTab({ api }) {
           </div>
         </div>
         <div style={{ marginBottom: 18 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: C.muted, marginBottom: 6 }}>Abstract</div>
-          <textarea value={form.abstract} onChange={setF('abstract')} rows={4}
-            style={{ ...inputSt, resize: 'vertical', lineHeight: 1.6 }} />
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: C.muted }}>Abstract (Markdown)</div>
+            <button onClick={() => setPreview((p) => !p)} style={{
+              background: 'transparent', border: `1px solid ${C.border}`, borderRadius: 6,
+              color: C.muted, fontSize: 11, padding: '3px 10px', cursor: 'pointer', fontFamily: 'inherit',
+            }}>{preview ? 'Edit' : 'Preview'}</button>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: preview ? '1fr 1fr' : '1fr', gap: 14 }}>
+            <textarea value={form.abstract} onChange={setF('abstract')} rows={4}
+              style={{ ...inputSt, resize: 'vertical', lineHeight: 1.6, fontFamily: F.mono, fontSize: 12 }} />
+            {preview && (
+              <div style={{ background: C.panel2, border: `1px solid ${C.border}`, borderRadius: 8,
+                padding: '10px 14px', overflowY: 'auto', maxHeight: 200 }}>
+                {form.abstract
+                  ? <MarkdownRenderer>{form.abstract}</MarkdownRenderer>
+                  : <span style={{ color: C.faint, fontSize: 13 }}>Preview will appear here…</span>}
+              </div>
+            )}
+          </div>
         </div>
         <div style={{ display: 'flex', gap: 10 }}>
           <Btn onClick={submit} disabled={saving} size="md">{saving ? 'Saving…' : editing ? 'Update paper' : 'Add paper'}</Btn>
-          {editing && <Btn variant="ghost" size="md" onClick={() => { setEditing(null); setForm(BLANK_PAPER); }}>Cancel</Btn>}
+          {editing && <Btn variant="ghost" size="md" onClick={() => { setEditing(null); setForm(BLANK_PAPER); setPreview(false); }}>Cancel</Btn>}
         </div>
       </Section>
 
@@ -620,9 +639,10 @@ function ProjectsTab({ api }) {
               style={{ ...inputSt, resize: 'vertical', lineHeight: 1.6, fontFamily: F.mono, fontSize: 12 }} />
             {preview && (
               <div style={{ background: C.panel2, border: `1px solid ${C.border}`, borderRadius: 8,
-                padding: '10px 14px', fontSize: 13, color: C.text, lineHeight: 1.7,
-                whiteSpace: 'pre-wrap', overflowY: 'auto', maxHeight: 200 }}>
-                {form.rapport || <span style={{ color: C.faint }}>Preview will appear here…</span>}
+                padding: '10px 14px', overflowY: 'auto', maxHeight: 200 }}>
+                {form.rapport
+                  ? <MarkdownRenderer>{form.rapport}</MarkdownRenderer>
+                  : <span style={{ color: C.faint, fontSize: 13 }}>Preview will appear here…</span>}
               </div>
             )}
           </div>
@@ -700,6 +720,7 @@ function PostsTab({ api }) {
   const [form,  setForm]      = useState(BLANK_POST);
   const [editing, setEditing] = useState(null);
   const [saving,  setSaving]  = useState(false);
+  const [preview,  setPreview]  = useState(false);
 
   useEffect(() => { api('/posts').then(setPosts).catch(() => {}); }, []);
 
@@ -715,7 +736,7 @@ function PostsTab({ api }) {
         const p = await api('/posts', { method: 'POST', body: form });
         setPosts((ps) => [p, ...ps]);
       }
-      setForm(BLANK_POST); setEditing(null);
+      setForm(BLANK_POST); setEditing(null); setPreview(false);
     } catch (e) { alert(e.message); }
     finally { setSaving(false); }
   };
@@ -756,9 +777,25 @@ function PostsTab({ api }) {
             style={{ ...inputSt, resize: 'vertical', lineHeight: 1.6 }} />
         </div>
         <div style={{ marginBottom: 18 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: C.muted, marginBottom: 6 }}>Body (Markdown)</div>
-          <textarea value={form.body} onChange={setF('body')} rows={8}
-            style={{ ...inputSt, resize: 'vertical', lineHeight: 1.6, fontFamily: F.mono, fontSize: 12 }} />
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: C.muted }}>Body (Markdown)</div>
+            <button onClick={() => setPreview((p) => !p)} style={{
+              background: 'transparent', border: `1px solid ${C.border}`, borderRadius: 6,
+              color: C.muted, fontSize: 11, padding: '3px 10px', cursor: 'pointer', fontFamily: 'inherit',
+            }}>{preview ? 'Edit' : 'Preview'}</button>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: preview ? '1fr 1fr' : '1fr', gap: 14 }}>
+            <textarea value={form.body} onChange={setF('body')} rows={8}
+              style={{ ...inputSt, resize: 'vertical', lineHeight: 1.6, fontFamily: F.mono, fontSize: 12 }} />
+            {preview && (
+              <div style={{ background: C.panel2, border: `1px solid ${C.border}`, borderRadius: 8,
+                padding: '10px 14px', overflowY: 'auto', maxHeight: 280 }}>
+                {form.body
+                  ? <MarkdownRenderer>{form.body}</MarkdownRenderer>
+                  : <span style={{ color: C.faint, fontSize: 13 }}>Preview will appear here…</span>}
+              </div>
+            )}
+          </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
           <input type="checkbox" id="featuredPost" checked={!!form.featured} onChange={setF('featured')} />
@@ -766,7 +803,7 @@ function PostsTab({ api }) {
         </div>
         <div style={{ display: 'flex', gap: 10 }}>
           <Btn onClick={submit} disabled={saving} size="md">{saving ? 'Saving…' : editing ? 'Update post' : 'Save post'}</Btn>
-          {editing && <Btn variant="ghost" size="md" onClick={() => { setEditing(null); setForm(BLANK_POST); }}>Cancel</Btn>}
+          {editing && <Btn variant="ghost" size="md" onClick={() => { setEditing(null); setForm(BLANK_POST); setPreview(false); }}>Cancel</Btn>}
         </div>
       </Section>
 
@@ -871,8 +908,10 @@ function AboutTab({ api }) {
             style={{ ...inputSt, resize: 'vertical', lineHeight: 1.6, fontFamily: F.mono, fontSize: 12 }} />
           {preview && (
             <div style={{ background: C.panel2, border: `1px solid ${C.border}`, borderRadius: 8,
-              padding: '10px 14px', fontSize: 13, color: C.text, lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>
-              {about.bio || <span style={{ color: C.faint }}>Preview will appear here…</span>}
+              padding: '10px 14px', overflowY: 'auto', maxHeight: 260 }}>
+              {about.bio
+                ? <MarkdownRenderer>{about.bio}</MarkdownRenderer>
+                : <span style={{ color: C.faint, fontSize: 13 }}>Preview will appear here…</span>}
             </div>
           )}
         </div>

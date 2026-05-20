@@ -14,7 +14,7 @@ export default function NotFound() {
   return (
     <div style={{ background: C.bg, color: C.text, fontFamily: F.sans, minHeight: '100vh' }}>
       <Navbar />
-      <div style={{ padding: '80px 80px 60px', maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
+      <div className="page-wrap" style={{ padding: '80px 80px 60px', maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
         <div style={{ fontFamily: F.mono, fontSize: 13, color: C.blue, letterSpacing: '0.1em', marginBottom: 24 }}>
           ERROR · 404
         </div>

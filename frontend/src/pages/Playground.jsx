@@ -22,7 +22,7 @@ export default function Playground() {
   return (
     <div style={{ background: C.bg, color: C.text, fontFamily: F.sans, minHeight: '100vh' }}>
       <Navbar />
-      <div style={{ padding: '40px 80px 60px', maxWidth: 1100, margin: '0 auto' }}>
+      <div className="page-wrap" style={{ padding: '40px 80px 60px', maxWidth: 1100, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 8 }}>
           <h1 style={{ fontSize: 32, fontWeight: 800, margin: 0 }}>Playground</h1>
           <span style={{ fontSize: 11, padding: '4px 10px', background: C.blue, borderRadius: 999,

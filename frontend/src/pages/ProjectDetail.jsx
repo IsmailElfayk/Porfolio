@@ -30,7 +30,7 @@ export default function ProjectDetail() {
   if (!project) return (
     <div style={{ background: C.bg, color: C.text, fontFamily: F.sans, minHeight: '100vh' }}>
       <Navbar />
-      <div style={{ padding: '80px 80px 60px', maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
+      <div className="page-wrap" style={{ padding: '80px 80px 60px', maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
         <div style={{ fontFamily: F.mono, fontSize: 13, color: C.blue, letterSpacing: '0.1em', marginBottom: 24 }}>ERROR · 404</div>
         <h1 style={{ fontSize: 40, fontWeight: 800, margin: '0 0 18px' }}>Project not found</h1>
         <Link to="/projects" style={{ color: C.blue, fontWeight: 600, fontSize: 14 }}>← Back to projects</Link>
@@ -44,7 +44,7 @@ export default function ProjectDetail() {
   return (
     <div style={{ background: C.bg, color: C.text, fontFamily: F.sans, minHeight: '100vh' }}>
       <Navbar showResume={false} />
-      <div style={{ padding: '32px 80px 60px', maxWidth: 1100, margin: '0 auto' }}>
+      <div className="page-wrap" style={{ padding: '32px 80px 60px', maxWidth: 1100, margin: '0 auto' }}>
 
         {/* Breadcrumb */}
         <div style={{ fontFamily: F.mono, fontSize: 11, color: C.muted, marginBottom: 24, letterSpacing: '0.05em' }}>

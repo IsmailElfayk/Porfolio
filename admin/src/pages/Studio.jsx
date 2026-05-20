@@ -1038,7 +1038,8 @@ export default function Studio({ token, onLogout }) {
   return (
     <div style={{ background: C.bg, color: C.text, fontFamily: F.sans, minHeight: '100vh' }}>
       <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '16px 32px', borderBottom: `1px solid ${C.border}`, background: C.bg }}>
+        padding: '16px 32px', borderBottom: `1px solid ${C.border}`, background: C.bg,
+        position: 'sticky', top: 0, zIndex: 300 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" /></svg>
           <span style={{ fontWeight: 700, fontSize: 15 }}>I.EL FAYK</span>
@@ -1060,6 +1061,11 @@ export default function Studio({ token, onLogout }) {
       </header>
 
       <div style={{ display: 'flex' }}>
+        {sidebarOpen && (
+          <div onClick={() => setSidebarOpen(false)} style={{
+            position: 'fixed', inset: 0, zIndex: 150, background: 'rgba(0,0,0,0.55)',
+          }} />
+        )}
         <aside className={`studio-sidebar${sidebarOpen ? ' open' : ''}`} style={{ width: 220, borderRight: `1px solid ${C.border}`, padding: '24px 16px', background: C.bg, fontSize: 13 }}>
           {SIDEBAR.map((s) => (
             <div key={s.g} style={{ marginBottom: 22 }}>

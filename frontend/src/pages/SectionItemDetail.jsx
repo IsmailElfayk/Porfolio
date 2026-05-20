@@ -71,7 +71,7 @@ export default function SectionItemDetail() {
         <h1 style={{ fontSize: 40, fontWeight: 800, margin: '0 0 28px', letterSpacing: '-0.01em' }}>{item.title}</h1>
 
         {item.rapport ? (
-          <div style={{ maxWidth: 780, fontSize: 15, lineHeight: 1.8, color: C.text }}>
+          <div style={{ width: '100%', fontSize: 15, lineHeight: 1.8, color: C.text }}>
             <MarkdownRenderer>{item.rapport}</MarkdownRenderer>
           </div>
         ) : (

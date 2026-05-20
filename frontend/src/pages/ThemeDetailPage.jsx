@@ -68,7 +68,7 @@ export default function ThemeDetailPage() {
 
         {/* Markdown description */}
         {theme.description ? (
-          <div style={{ maxWidth: 780 }}>
+          <div style={{ width: '100%' }}>
             <MarkdownRenderer>{theme.description}</MarkdownRenderer>
           </div>
         ) : (

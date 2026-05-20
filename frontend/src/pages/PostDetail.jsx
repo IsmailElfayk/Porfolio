@@ -81,7 +81,7 @@ export default function PostDetail() {
 
         {/* Body (Markdown) */}
         {p.body ? (
-          <div style={{ maxWidth: 780, fontSize: 15, lineHeight: 1.8, color: C.text, marginBottom: 40 }}>
+          <div style={{ width: '100%', fontSize: 15, lineHeight: 1.8, color: C.text, marginBottom: 40 }}>
             <MarkdownRenderer>{p.body}</MarkdownRenderer>
           </div>
         ) : (

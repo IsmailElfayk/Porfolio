@@ -111,7 +111,7 @@ export default function PaperDetail() {
         {p.abstract && (
           <div style={{ background: C.panel, border: `1px solid ${C.border}`, borderRadius: 12, padding: '22px 26px', marginBottom: 32 }}>
             <div style={{ fontSize: 12, fontWeight: 700, color: C.muted, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12 }}>Abstract</div>
-            <div style={{ maxWidth: 780, fontSize: 15, lineHeight: 1.8, color: C.text }}>
+            <div style={{ width: '100%', fontSize: 15, lineHeight: 1.8, color: C.text }}>
               <MarkdownRenderer>{p.abstract}</MarkdownRenderer>
             </div>
           </div>
